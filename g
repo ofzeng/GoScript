@@ -71,7 +71,7 @@ def get_output_paths(filename, verbose):
     compiled_file = compiled_folder + "/" + name + ".go" # ~/go/src/go_temp/script/script.go
     executable_file = os.path.normpath(os.environ['GOBIN']) + '/' + name # ~/go/bin/script
     if verbose:
-        print compiled_file
+        print "Script compiled to: " + compiled_file
     return (compiled_folder, compiled_file, executable_file)
 
 def compile_and_run(filename, verbose = True):
