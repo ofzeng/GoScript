@@ -47,7 +47,7 @@ def preprocess(filename, compiled_file, compiled_folder):
             foundBeginning = True
             additional_whitespace += 4
         if stripped.startswith("print "):
-            lines.append(" " * additional_whitespace + "fmt.Println(" + "".join(filter(None, stripped.split(" "))[1:]) + ")\n")
+            lines.append(" " * additional_whitespace + "fmt.Println(" + stripped.split(" ", 1)[1] + ")\n")
         elif len(stripped) > 0 and not stripped.startswith("//") and stripped[-1] == ':':
             expected_whitespace += 4
             lines.append(" " * additional_whitespace + line[:-2] + ' {' + '\n')
@@ -62,7 +62,7 @@ def preprocess(filename, compiled_file, compiled_folder):
         f.write("".join(lines))
 
 def get_output_paths(filename, verbose):
-    compiled_folder = os.path.normpath(os.environ['GOPATH']) + "src/" # ~/go/src
+    compiled_folder = os.path.normpath(os.environ['GOPATH']) + "/src/" # ~/go/src
     name, extension = os.path.splitext(filename) # name = 'path/to/script', extension = '.go'
     name = os.path.basename(name) # name = 'script'
     compiled_folder += "go_temp/" + name # ~/go/src/go_temp/script
